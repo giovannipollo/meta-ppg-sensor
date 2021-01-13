@@ -54,6 +54,7 @@ EXTRA_IMAGE_FEATURES += "debug-tweaks tools-debug eclipse-debug ssh-server-opens
 IMAGE_INSTALL_append = " linux-firmware-rpidistro-bcm43455"
 IMAGE_INSTALL_append = " connman connman-client "
 IMAGE_INSTALL_append = " ppg-app"
+IMAGE_INSTALL_append = " virtual-ppg-sensor"
 KERNEL_MODULE_AUTOLOAD += "virtual-ppg-sensor"
 IMAGE_FSTYPES = "tar.xz ext3 rpi-sdimg"
 ```
