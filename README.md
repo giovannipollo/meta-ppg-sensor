@@ -1,10 +1,13 @@
-## ASSIGNMENT LINUX ON RASPBERRY PI3B+
+# ASSIGNMENT LINUX ON RASPBERRY PI3B+
 
-I tested the program on a raspberry pi 3B+. 
+## Starting condition
 
 The starting condition is to have the Linux machine/virtual machine ready to build a kernel module with the command bitbake. 
 
-If everything is correct, in the *poky* folder (located in the home directory), we should have, among other things, a folder named *meta-example*. 
+## Cloning the repository
+
+To repository must be cloned in the `/poky` folder. 
+
 
 Inside the latter, we should have another folder called *recipes-examples*. We have to copy/move  the two folder, nomi delle cartelle, inside recipies-examples. If we want to use the terminal, we can use the follwing command:
 
