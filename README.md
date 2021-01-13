@@ -54,8 +54,8 @@ EXTRA_IMAGE_FEATURES += "debug-tweaks tools-debug eclipse-debug ssh-server-opens
 IMAGE_INSTALL_append = " linux-firmware-rpidistro-bcm43455"
 IMAGE_INSTALL_append = " connman connman-client "
 IMAGE_INSTALL_append = " ppg-app"
-IMAGE_INSTALL_append = " virtual-ppg-sensor"
-KERNEL_MODULE_AUTOLOAD += "virtual-ppg-sensor"
+IMAGE_INSTALL_append = " mymod"
+KERNEL_MODULE_AUTOLOAD += "mymod"
 IMAGE_FSTYPES = "tar.xz ext3 rpi-sdimg"
 ```
 These are used to specify the machine where we want to deploy our application as well as the application and the kernel module.
@@ -66,11 +66,8 @@ After these steps, we can simply launch the following bitbake command in order t
 bitbake core-image-full-cmdline
 ```
 
-## Deploy on Raspberrypi
+## Deploy on Raspberrypi & Timing analysis
 
-Once the build process is completed, we can copy the obtained Linux image to a Micro SD. 
+Once the build process is completed, we can copy the obtained Linux image to a Micro SD and the connect via ssh to test the results.
 
-```bash
-sudo dd if=/home/yoctotrainee/poky/build_rpi3/tmp/deploy/images/raspberrypi3/core-image-full-cmdline-raspberrypi3.rpi-sdimg of=path_of_micro_sd bs=1M
-```
-where the *path_of_micro_sd* is usually `/dev/sdb` if we use a virtual machine. 
+The timing obtained is pretty good. In fact we expect a timing of 40,96s. I obtained, on the Raspberrypi 3B+, 41.20s. The error is 0.58% and it is an accettable value. 
