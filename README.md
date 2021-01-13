@@ -6,41 +6,62 @@ The starting condition is to have the Linux machine/virtual machine ready to bui
 
 ## Cloning the repository
 
-To repository must be cloned in the `/poky` folder. 
-
-
-Inside the latter, we should have another folder called *recipes-examples*. We have to copy/move  the two folder, nomi delle cartelle, inside recipies-examples. If we want to use the terminal, we can use the follwing command:
-
-
+To repository must be cloned in the `/home/yoctotrainee/poky` folder. To move into that folder we can use the terminal command `cd /home/yoctotrainee/poky`. After this we can clone the repository using:
 
 ```bash
-COMANDI TERMINALE DI COPIA
-
-mv ...
-mv ..
-mv ..
-
+git clone https://github.com/giop98/Assignment-Linux-Sensor
 ```
 
-In addition to that, we have to go in the following path "/home/yoctotrainee/poky/build_rpi3/conf" and open the file **bblayers.conf**. 
+## Setup & configuration
 
+First we need to setup out build environment. We have to move in the poky folder `cd /home/yoctotrainee/poky` and then we have to execute the following command:
 
+```bash 
+source oe-init-build-env build_rpi3
+```
 
-Inside the field BBLAYERS ?= "" we have to add the follwing line /home/yoctotrainee/poky/meta-example \ . Otherwise, we can simply substitute the bblayers.conf, with the one provided in the repo. 
+In addition to that, we have to go in the following path `/home/yoctotrainee/poky/build_rpi3/conf` and open the file **bblayers.conf**. 
 
+The content of the file must be modified with the following:
 
+```bash
+# POKY_BBLAYERS_CONF_VERSION is increased each time build/conf/bblayers.conf 
+# changes incompatibly
+POKY_BBLAYERS_CONF_VERSION = "2"
 
-In the same folder, namely ```/home/yoctotrainee/poky/build_rpi3/conf ```, we need to replace the file layer.conf with the one provided in the github repo. After this, we can simply build everything with the command ``` bitbake core-image-minimal ```. 
+BBPATH = "${TOPDIR}" 
+BBFILES ?= ""
 
+BBLAYERS ?= " \
+	/home/yoctotrainee/poky/meta \
+	/home/yoctotrainee/poky/meta-poky \ 
+	/home/yoctotrainee/poky/meta-yocto-bsp \ 
+	/home/yoctotrainee/poky/meta-openembedded/meta-oe \ 
+	/home/yoctotrainee/poky/meta-openembedded/meta-multimedia \ 
+	/home/yoctotrainee/poky/meta-openembedded/meta-networking \ 
+	/home/yoctotrainee/poky/meta-openembedded/meta-python \ 
+	/home/yoctotrainee/poky/meta-raspberrypi \
+	/home/yoctotrainee/poky/meta-ppg-sensor \
+	"
+```
 
+In the same folder, namely `/home/yoctotrainee/poky/build_rpi3/conf `, we need to add to the file **layer.conf** the following lines:
 
-DEPLOY on the board  va testato
+```bash
+MACHINE ?= "raspberrypi3" 
+ENABLE_UART = "1"
+EXTRA_IMAGE_FEATURES += "debug-tweaks tools-debug eclipse-debug ssh-server-openssh" 
+IMAGE_INSTALL_append = " linux-firmware-rpidistro-bcm43455"
+IMAGE_INSTALL_append = " connman connman-client "
+IMAGE_INSTALL_append = " ppg-app"
+KERNEL_MODULE_AUTOLOAD += "virtual-ppg-sensor"
+IMAGE_FSTYPES = "tar.xz ext3 rpi-sdimg"
+```
+These are used to specify the machine where we want to deploy our application as well as the application and the kernel module.
 
+After these steps, we can simply launch the following bitbake command:
 
-
-con rpi-imager funziona, ma bisogna farlo dal terminale. dd prova
-
-
-
-Poi collega al router con cavo ethernet, find ip address, ssh, e poi run the program.
+```bash
+bitbake core-image-full-cmdline
+```
 
