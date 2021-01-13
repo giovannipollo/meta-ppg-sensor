@@ -1,4 +1,4 @@
-# ASSIGNMENT LINUX ON RASPBERRY PI3B+
+# ASSIGNMENT LINUX ON RASPBERRY PI 3B+
 
 ## Starting condition
 
@@ -66,8 +66,8 @@ After these steps, we can simply launch the following bitbake command in order t
 bitbake core-image-full-cmdline
 ```
 
-## Deploy on Raspberrypi & Timing analysis
+## Deploy on Raspberry Pi & Timing analysis
 
-Once the build process is completed, we can copy the obtained Linux image to a Micro SD and the connect via ssh to test the results.
+Once the build process is completed, we can copy the obtained Linux image to a Micro SD, boot on the Raspberry Pi and then connect via ssh to test the results.
 
-The timing obtained is pretty good. In fact we expect a timing of 40,96s. I obtained, on the Raspberrypi 3B+, 41.20s. The error is 0.58% and it is an accettable value. 
+The timing obtained is pretty good. In fact we expect a time of 40,96s for a signle execution of the application. I obtained, on the Raspberry Pi 3B+, 41.20s. The error is 0.58% and it is an accettable value. 
