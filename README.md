@@ -14,7 +14,7 @@ git clone https://github.com/giop98/Assignment-Linux-Sensor
 
 ## Setup & configuration
 
-First we need to setup out build environment. We have to move in the poky folder `cd /home/yoctotrainee/poky` and then we have to execute the following command:
+First we need to setup our build environment. We have to move in the poky folder `cd /home/yoctotrainee/poky` and then we have to execute the following command:
 
 ```bash 
 source oe-init-build-env build_rpi3
@@ -59,9 +59,17 @@ IMAGE_FSTYPES = "tar.xz ext3 rpi-sdimg"
 ```
 These are used to specify the machine where we want to deploy our application as well as the application and the kernel module.
 
-After these steps, we can simply launch the following bitbake command:
+After these steps, we can simply launch the following bitbake command in order to build the module:
 
 ```bash
 bitbake core-image-full-cmdline
 ```
 
+## Deploy on Raspberrypi
+
+Once the build process is completed, we can copy the obtained Linux image to a Micro SD. 
+
+```bash
+sudo dd if=/home/yoctotrainee/poky/build_rpi3/tmp/deploy/images/raspberrypi3/core-image-full-cmdline-raspberrypi3.rpi-sdimg of=path_of_micro_sd bs=1M
+```
+where the *path_of_micro_sd* is usually `/dev/sdb` if we use a virtual machine. 
