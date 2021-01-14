@@ -87,8 +87,6 @@ int main(int argc, char **argv) {
 
 void *read_data() {
 
-    	struct timeval start, end;
-    	double time_taken;
     	struct timespec tim, tim2;
     	tim.tv_sec = 0;
     	tim.tv_nsec = 20000000;
@@ -100,20 +98,15 @@ void *read_data() {
         sem_wait(&sem_read_data);
         printf("\nRead Data has started\n");
         // Initialize the complex array for FFT computation
-        gettimeofday(&start, NULL);
         for (int i = 0; i < N; i++) {
 		read(fd, to_be_read, sizeof(to_be_read));
 		valori[i] = to_be_read[0];
+		printf("valori[%d]: %d\n", i, valori[i]);
 		v[i].Re = to_be_read[0];
 		v[i].Im = 0;
-		printf("valori[%d]: %d\n", i, valori[i]);
             	while (nanosleep(&tim, &tim2) < 0);
         }
 
-        gettimeofday(&end, NULL);
-        time_taken = (end.tv_sec - start.tv_sec) * 1e6;
-        time_taken = (time_taken + (end.tv_usec - start.tv_usec)) * 1e-6;
-        printf("Time taken: %f\n", time_taken);
         printf("\nRead Data has finished\n");
 
         sem_post(&sem_compute);
