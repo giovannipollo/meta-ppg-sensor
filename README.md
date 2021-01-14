@@ -70,4 +70,4 @@ bitbake core-image-full-cmdline
 
 Once the build process is completed, we can copy the obtained Linux image to a Micro SD, boot on the Raspberry Pi and then connect via ssh to test the results.
 
-The timing obtained is pretty good. In fact we expect a time of 40,96s for a signle execution of the application. I obtained, on the Raspberry Pi 3B+, 41.20s. The error is 0.58% and it is an accettable value. 
+The timing obtained is pretty good. In fact we expect a time of 20ms for a signle read operation. I obtained, on the Raspberry Pi 3B+, 20.08s. The error is 0.4% and it is an accettable value. 
