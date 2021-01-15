@@ -9,7 +9,7 @@ The starting condition is to have the Linux machine/virtual machine ready to bui
 To repository must be cloned in the `/home/yoctotrainee/poky` folder. To move into that folder we can use the terminal command `cd /home/yoctotrainee/poky`. After this we can clone the repository using:
 
 ```bash
-git clone https://github.com/giop98/Assignment-Linux-Sensor
+git clone https://github.com/giop98/meta-ppg-sensor
 ```
 
 ## Setup & configuration
