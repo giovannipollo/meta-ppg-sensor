@@ -45,7 +45,7 @@ BBLAYERS ?= " \
 	"
 ```
 
-In the same folder, namely `/home/yoctotrainee/poky/build_rpi3/conf `, we need to add to the file **layer.conf** the following lines:
+In the same folder, namely `/home/yoctotrainee/poky/build_rpi3/conf `, we need to add to the file **local.conf** the following lines:
 
 ```bash
 MACHINE ?= "raspberrypi3" 
